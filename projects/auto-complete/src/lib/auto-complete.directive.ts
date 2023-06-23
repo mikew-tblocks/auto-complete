@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ComponentFactoryResolver,
+  AfterViewInit,
   ComponentRef,
   Directive,
   EventEmitter, Host,
@@ -66,8 +66,7 @@ export class NguiAutoCompleteDirective implements OnInit, OnChanges, AfterViewIn
   private scheduledBlurHandler: any;
   private documentClickListener: (e: MouseEvent) => any;
 
-  constructor(private resolver: ComponentFactoryResolver,
-              public  viewContainerRef: ViewContainerRef,
+  constructor(public  viewContainerRef: ViewContainerRef,
               @Optional() @Host() @SkipSelf() private parentForm: ControlContainer) {
     this.el = this.viewContainerRef.element.nativeElement;
   }
@@ -163,9 +162,7 @@ export class NguiAutoCompleteDirective implements OnInit, OnChanges, AfterViewIn
     this.hideAutoCompleteDropdown();
     this.scheduledBlurHandler = null;
 
-    const factory = this.resolver.resolveComponentFactory(NguiAutoCompleteComponent);
-
-    this.componentRef = this.viewContainerRef.createComponent(factory);
+    this.componentRef = this.viewContainerRef.createComponent(NguiAutoCompleteComponent);
 
     const component = this.componentRef.instance;
     component.keyword = this.inputEl.value;
